@@ -11,4 +11,9 @@ Aulas do curso jovem programador senac
   - Front vs back 
 ## Conceitos GIT
   - https://blog.testproject.io/2021/03/22/git-commands-every-sdet-should-know/
-  - 
+### Comandos
+  - git clone
+  - git fetch 
+  
+
+## HTML
