@@ -1,0 +1,13 @@
+<div>
+  <div>
+    <span>{{tempoAtual.cidade}}, {{tempoAtual.pais}}</span>
+    <span>{{tempoAtual.date | date:'fullDate'}}</span>
+  </div>
+  <div>
+    <img height="72" [src]='tempoAtual.image'>
+    <span>{{tempoAtual.temperatura | number:'1.0-0'}}℃</span>
+  </div>
+  <div>
+    {{tempoAtual.descricao}}
+  </div>
+</div>
