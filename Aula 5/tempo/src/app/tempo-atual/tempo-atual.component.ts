@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ITempoAtual } from '../interfaces';
+import { TempoService } from '../tempo/tempo.service';
 
 @Component({
   selector: 'app-tempo-atual',
@@ -9,7 +10,7 @@ import { ITempoAtual } from '../interfaces';
 export class TempoAtualComponent implements OnInit {
 
   tempoAtual: ITempoAtual
-  constructor() {
+  constructor(private tempoService: TempoService) {
     this.tempoAtual = {
       cidade: 'São Paulo',
       pais: 'Brasil',
@@ -20,7 +21,9 @@ export class TempoAtualComponent implements OnInit {
     }
   }
 
+
   ngOnInit(): void {
+    this.tempoService.getCurrentWeather('São Paulo', 'Brasil').subscribe((data) => this.tempoAtual = data)
   }
 
 }
