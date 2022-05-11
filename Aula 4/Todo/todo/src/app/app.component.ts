@@ -9,11 +9,10 @@ import { FormsModule } from "@angular/forms";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'todo';
   private list = new TodoList("Senac", [
-    new TodoItem("Go for run"),
-    new TodoItem("Get flowers"),
-    new TodoItem("Collect tickets"),
+    new TodoItem("Estudar HTML"),
+    new TodoItem("Estudar CSS"),
+    new TodoItem("Estudar JAVASCRIPT"),
   ]);
   get username(): string {
     return this.list.user;
