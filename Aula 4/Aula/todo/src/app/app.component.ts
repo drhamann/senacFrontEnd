@@ -12,6 +12,7 @@ export class AppComponent {
     new Tarefa("Estudar HTML"),
     new Tarefa("Estudar CSS"),
     new Tarefa("Estudar JAVASCRIPT"),
+    new Tarefa("Estudar JAVASCRIPT"),
   ]);
   get username(): string {
     return this.list.usuario;
@@ -21,8 +22,9 @@ export class AppComponent {
   }
 
   get items(): readonly Tarefa[] {
-    return this.list.tarefas.filter(item =>!item.completo);
+    return this.list.tarefas.filter(item => this.showComplete || !item.completo);
   }
+
 
   addTarefa(newItem: string) {
     if (newItem != "") {
