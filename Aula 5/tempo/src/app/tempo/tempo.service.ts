@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { ITempoAtual } from '../interfaces';
+import { ICurrentWeatherData, ITempoAtual } from '../interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +10,7 @@ import { ITempoAtual } from '../interfaces';
 export class TempoService {
 
   constructor(private httpClient: HttpClient) { }
+
   getCurrentWeather(city: string, country: string): Observable<ITempoAtual> {
     return this.httpClient.get<ICurrentWeatherData>(
       `${environment.baseUrl}api.openweathermap.org/data/2.5/weather?` +
@@ -18,6 +19,7 @@ export class TempoService {
   }
 
   private transformToITempoAtual(data: ICurrentWeatherData): ITempoAtual {
+    console.log(data)
     return {
       cidade: data.name,
       pais: data.sys.country,
@@ -33,17 +35,4 @@ export class TempoService {
   }
 }
 
-interface ICurrentWeatherData {
-  weather: [{
-    description: string,
-    icon: string
-  }],
-  main: {
-    temp: number
-  },
-  sys: {
-    country: string
-  },
-  dt: number,
-  name: string
-}
+
