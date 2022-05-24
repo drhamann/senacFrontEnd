@@ -23,7 +23,7 @@ export class TempoService {
     return {
       cidade: data.name,
       pais: data.sys.country,
-      date: new Date(data.dt * 1000).toLocaleDateString('pt-BR'),
+      date: new Date(data.dt * 1000).toLocaleDateString('en-US'),
       descricao: data.weather[0].description,
       temperatura: this.convertKelvinToCelcius(data.main.temp),
       image: `http://openweathermap.org/img/w/${data.weather[0].icon}.png`,

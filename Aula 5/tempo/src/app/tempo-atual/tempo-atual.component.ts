@@ -10,8 +10,7 @@ import { TempoService } from '../tempo/tempo.service';
 export class TempoAtualComponent implements OnInit {
 
   tempoAtual: ITempoAtual
-  constructor(private tempoService: TempoService)
-   {
+  constructor(private tempoService: TempoService) {
     this.tempoAtual = {
       cidade: 'Nop',
       pais: 'Brasil',
@@ -24,7 +23,7 @@ export class TempoAtualComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.tempoService.getCurrentWeather('Blumenau', 'Brasil').subscribe((data) => this.tempoAtual = data)
+    this.tempoService.getCurrentWeather('Lages', 'Brasil').subscribe((data) => this.tempoAtual = data)
   }
 
 }
