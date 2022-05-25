@@ -7,6 +7,11 @@ export interface ITempoAtual {
   descricao: string
 }
 
+export interface Coordenadas {
+  latitude: number
+  longitude: number
+}
+
 export interface ICurrentWeatherData {
   weather: [{
     description: string,
