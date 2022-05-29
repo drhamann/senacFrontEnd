@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Coordenadas, ICurrentWeatherData, ITempoAtual } from '../interfaces';
 
@@ -8,6 +8,15 @@ import { Coordenadas, ICurrentWeatherData, ITempoAtual } from '../interfaces';
   providedIn: 'root'
 })
 export class TempoService {
+
+  tempoAtual: BehaviorSubject<ITempoAtual> = new BehaviorSubject<ITempoAtual>({
+    cidade: '',
+    pais: '',
+    date: Date.now().toLocaleString(),
+    descricao: '',
+    temperatura: 0,
+    image: ''
+  })
 
   constructor(private httpClient: HttpClient) { }
 

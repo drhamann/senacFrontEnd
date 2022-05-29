@@ -5,7 +5,7 @@
   <div class="mat-caption vertical-margin">Sua cidade, sua previsão, aqui e agora!</div>
 </div>
 <div fxLayoutAlign="center">
-  <app-busca-cidade (eventoDeBusca)="realizarBusca($event)"></app-busca-cidade>
+  <app-busca-cidade></app-busca-cidade>
 </div>
 <div fxLayout="row">
   <div fxFlex></div>
@@ -16,7 +16,7 @@
       </mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <app-tempo-atual [tempo]="tempoAtual"></app-tempo-atual>
+      <app-tempo-atual></app-tempo-atual>
     </mat-card-content>
   </mat-card>
   <div fxFlex></div>

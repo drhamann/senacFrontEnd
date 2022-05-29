@@ -7,6 +7,10 @@ import { TempoService } from '../tempo/tempo.service';
   templateUrl: './tempo-atual.component.html',
   styleUrls: ['./tempo-atual.component.scss']
 })
-export class TempoAtualComponent {
-  @Input() tempo!: ITempoAtual
+export class TempoAtualComponent implements OnInit {
+  constructor(private tempoService: TempoService) { }
+  ngOnInit(): void { this.tempoService.tempoAtual.subscribe(data => (this.tempo = data)) }
+  // @Input()
+  tempo!: ITempoAtual
+
 }

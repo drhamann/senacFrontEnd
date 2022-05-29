@@ -9,20 +9,16 @@ import { ITempoAtual } from './interfaces';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'tempo'
-
   tempoAtual!: ITempoAtual
   constructor(private tempoService: TempoService) { }
   ngOnInit(): void {
-    this.tempoService.getCurrentWeather('Lages', 'Brasil').subscribe((data) => this.tempoAtual = data)
+    this.tempoService.getCurrentWeather('Lages', 'Brasil').subscribe((data) => this.tempoService.tempoAtual.next(data))
   }
-
-  realizarBusca(valorDaBusca: string) {
+  /*realizarBusca(valorDaBusca: string) {
     if (valorDaBusca) {
       const valorDoInput = valorDaBusca.split(',').map(letra => letra.trim())
       this.tempoService.getCurrentWeather(valorDoInput[0], valorDoInput.length > 1 ? valorDoInput[1] : undefined).pipe(debounceTime(1000))
         .subscribe(data => (this.tempoAtual = data))
     }
-  }
-
+  }*/
 }
