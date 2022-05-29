@@ -1,19 +1,19 @@
-<div *ngIf="tempoAtual">
+<div *ngIf="tempo">
   <div fxLayout="row">
-    <div fxFlex="66%" class="mat-title no-margin">{{tempoAtual.cidade}}, {{tempoAtual.pais}}</div>
-    <div fxFlex class="right mat-subheading-2 no-margin">{{tempoAtual.date | date:'dd/MM/yyyy' }}</div>
+    <div fxFlex="66%" class="mat-title no-margin">{{tempo.cidade}}, {{tempo.pais}}</div>
+    <div fxFlex class="right mat-subheading-2 no-margin">{{tempo.date | date:'dd/MM/yyyy' }}</div>
   </div>
   <div fxLayout="row" fxLayoutAlign="center center">
     <div fxFlex="55%">
-      <img style="zoom: 175%" alt="72" height="72" [src]="tempoAtual.image">
+      <img style="zoom: 175%" alt="72" height="72" [src]="tempo.image">
     </div>
     <div fxFlex class="right no-margin">
-      <p class="mat-display-3">{{tempoAtual.temperatura | number:'1.0-0'}}℃
+      <p class="mat-display-3">{{tempo.temperatura | number:'1.0-0'}}℃
         <span class="mat-display-1 unit">℉</span>
       </p>
     </div>
   </div>
   <div fxLayoutAlign="center" class="mat-caption">
-    {{tempoAtual.descricao}}
+    {{tempo.descricao}}
   </div>
 </div>
