@@ -10,7 +10,7 @@ import { TempoService } from '../tempo/tempo.service';
 export class TempoAtualComponent implements OnInit {
   constructor(private tempoService: TempoService) { }
   ngOnInit(): void { this.tempoService.tempoAtual.subscribe(data => (this.tempo = data)) }
-  // @Input()
-  tempo!: ITempoAtual
 
+  tempo!: ITempoAtual
+  // @Input()
 }
