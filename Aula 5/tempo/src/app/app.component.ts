@@ -1,25 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { debounceTime } from 'rxjs';
-import { TempoService } from './tempo/tempo.service';
+import { Component } from '@angular/core';
 import { ITempoAtual } from './interfaces';
+import { TempoService } from './tempo/tempo.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   tempoAtual!: ITempoAtual
-  constructor(private tempoService: TempoService) { }
-  ngOnInit(): void {
-    this.tempoService.getCurrentWeather('Lages', 'Brasil').subscribe((data) => this.tempoService.tempoAtual.next(data))
+  constructor(private tempoService: TempoService) {
+    this.tempoService.getDefaulttWeather().subscribe(data => this.tempoAtual = data)
   }
-  /*realizarBusca(valorDaBusca: string) {
-    if (valorDaBusca) {
-      const valorDoInput = valorDaBusca.split(',').map(letra => letra.trim())
-      this.tempoService.getCurrentWeather(valorDoInput[0], valorDoInput.length > 1 ? valorDoInput[1] : undefined).pipe(debounceTime(1000))
-        .subscribe(data => (this.tempoAtual = data))
-    }
-  }*/
 }
-

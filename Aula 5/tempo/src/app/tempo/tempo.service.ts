@@ -1,8 +1,10 @@
 import { HttpClient } from '@angular/common/http';
+import { ThisReceiver } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Coordenadas, ICurrentWeatherData, ITempoAtual } from '../interfaces';
+import { LocalStorageService } from '../local-storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +20,19 @@ export class TempoService {
     image: ''
   })
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private localStorageService: LocalStorageService) {
+    let cidade = this.localStorageService.get(StorageKeys.CIDADE)
+    cidade = cidade ? cidade : 'Lages'
+    let pais = this.localStorageService.get(StorageKeys.PAIS)
+    pais = pais ? pais : 'Brasil'
+    this.tempoAtual.value.cidade = cidade
+    this.tempoAtual.value.pais = pais
+    this.getCurrentWeather(cidade, pais).subscribe(data => this.tempoAtual.next(data))
+  }
+
+  getDefaulttWeather(): Observable<ITempoAtual> {
+    return this.getCurrentWeather(this.tempoAtual.value.cidade, this.tempoAtual.value.pais)
+  }
 
   getCurrentWeather(busca: string | number, pais?: string): Observable<ITempoAtual> {
     let uriParams = ''
@@ -30,6 +44,8 @@ export class TempoService {
     if (pais) {
       uriParams = `${uriParams},${pais}`
     }
+    this.localStorageService.set(StorageKeys.CIDADE, busca.toLocaleString())
+    this.localStorageService.set(StorageKeys.PAIS, pais ? pais : 'Brasil')
     return this.getCurrentWeatherHelper(uriParams)
   }
 
@@ -43,13 +59,6 @@ export class TempoService {
     const uriParams = `lat=${coords.latitude}&lon=${coords.longitude}`
     return this.getCurrentWeatherHelper(uriParams)
   }
-
-  /*getCurrentWeather(city: string, country: string): Observable<ITempoAtual> {
-    return this.httpClient.get<ICurrentWeatherData>(
-      `${environment.baseUrl}api.openweathermap.org/data/2.5/weather?` +
-      `q=${city},${country}&appid=${environment.appId}`
-    ).pipe(map(data => this.transformToITempoAtual(data)))
-  }*/
 
   private transformToITempoAtual(data: ICurrentWeatherData): ITempoAtual {
     console.log(data)
@@ -66,6 +75,12 @@ export class TempoService {
   private convertKelvinToCelcius(kelvin: number): number {
     return kelvin - 272.15
   }
+}
+
+class StorageKeys {
+  static readonly CIDADE = 'cidade';
+  static readonly PAIS = 'pais';
+  static readonly TEMPO_ATUAL = 'tempoAtual';
 }
 
 

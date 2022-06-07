@@ -19,18 +19,4 @@ export class BuscaCidadeComponent implements OnInit {
         .subscribe(data => this.tempoService.tempoAtual.next(data))
     })
   }
-
-  // @Output()
-  /*this.busca.valueChanges.pipe(debounceTime(1000)).subscribe((valorDaBusca: string) => {
-    if (!this.busca.invalid) {
-      this.eventoDeBusca.emit(valorDaBusca)
-    }
-  })
-}*/
-  /*if (valorDaBusca) {
-    const valorDoInput = valorDaBusca.split(',').map(letra => letra.trim())
-    this.tempoService.getCurrentWeather(valorDoInput[0], valorDoInput.length > 1 ? valorDoInput[1] : undefined).pipe(debounceTime(1000))
-      .subscribe(data => (console.log(data)))
-  }*/
-
 }
