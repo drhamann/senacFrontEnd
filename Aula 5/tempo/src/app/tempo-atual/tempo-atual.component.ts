@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ITempoAtual } from '../interfaces';
 import { TempoService } from '../tempo/tempo.service';
 
@@ -8,23 +8,9 @@ import { TempoService } from '../tempo/tempo.service';
   styleUrls: ['./tempo-atual.component.scss']
 })
 export class TempoAtualComponent implements OnInit {
+  constructor(private tempoService: TempoService) { }
+  ngOnInit(): void { this.tempoService.tempoAtual.subscribe(data => (this.tempo = data)) }
 
-  tempoAtual: ITempoAtual
-  constructor(private tempoService: TempoService)
-   {
-    this.tempoAtual = {
-      cidade: 'Nop',
-      pais: 'Brasil',
-      date: '01/01/2020',
-      descricao: 'Ensolarado',
-      temperatura: 20,
-      image: 'assets/img/ensolarado.svg'
-    }
-  }
-
-
-  ngOnInit(): void {
-    this.tempoService.getCurrentWeather('Blumenau', 'Brasil').subscribe((data) => this.tempoAtual = data)
-  }
-
+  tempo!: ITempoAtual
+  // @Input()
 }
