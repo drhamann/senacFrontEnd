@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Coordenadas, ICurrentWeatherData, ITempoAtual } from '../interfaces';
-import { LocalStorageService } from '../local-storage.service';
+import { LocalStorageService, StorageKeys } from '../local-storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -21,13 +21,18 @@ export class TempoService {
   })
 
   constructor(private httpClient: HttpClient, private localStorageService: LocalStorageService) {
-    let cidade = this.localStorageService.get(StorageKeys.CIDADE)
-    cidade = cidade ? cidade : 'Lages'
-    let pais = this.localStorageService.get(StorageKeys.PAIS)
-    pais = pais ? pais : 'Brasil'
-    this.tempoAtual.value.cidade = cidade
-    this.tempoAtual.value.pais = pais
+    let { cidade, pais } = this.retorneUltimaBusca();
     this.getCurrentWeather(cidade, pais).subscribe(data => this.tempoAtual.next(data))
+  }
+
+  private retorneUltimaBusca() {
+    let cidade = this.localStorageService.get(StorageKeys.CIDADE);
+    cidade = cidade ? cidade : 'Lages';
+    let pais = this.localStorageService.get(StorageKeys.PAIS);
+    pais = pais ? pais : 'Brasil';
+    this.tempoAtual.value.cidade = cidade;
+    this.tempoAtual.value.pais = pais;
+    return { cidade, pais };
   }
 
   getDefaulttWeather(): Observable<ITempoAtual> {
@@ -44,20 +49,23 @@ export class TempoService {
     if (pais) {
       uriParams = `${uriParams},${pais}`
     }
-    this.localStorageService.set(StorageKeys.CIDADE, busca.toLocaleString())
-    this.localStorageService.set(StorageKeys.PAIS, pais ? pais : 'Brasil')
     return this.getCurrentWeatherHelper(uriParams)
-  }
-
-  private getCurrentWeatherHelper(uriParams: string): Observable<ITempoAtual> {
-    return this.httpClient.get<ICurrentWeatherData>(
-      `${environment.baseUrl}api.openweathermap.org/data/2.5/weather?${uriParams}&appid=${environment.appId}`)
-      .pipe(map(data => this.transformToITempoAtual(data)))
   }
 
   getCurrentWeatherByCoords(coords: Coordenadas): Observable<ITempoAtual> {
     const uriParams = `lat=${coords.latitude}&lon=${coords.longitude}`
     return this.getCurrentWeatherHelper(uriParams)
+  }
+  private getCurrentWeatherHelper(uriParams: string): Observable<ITempoAtual> {
+    return this.httpClient.get<ICurrentWeatherData>(
+      `${environment.baseUrl}api.openweathermap.org/data/2.5/weather?${uriParams}&appid=${environment.appId}`)
+      .pipe(map(data => {
+        const tempo = this.transformToITempoAtual(data)
+        this.localStorageService.set(StorageKeys.CIDADE, tempo.cidade)
+        this.localStorageService.set(StorageKeys.PAIS, tempo.pais)
+        this.localStorageService.set(StorageKeys.TEMPO_ATUAL, JSON.stringify(tempo))
+        return tempo
+      }))
   }
 
   private transformToITempoAtual(data: ICurrentWeatherData): ITempoAtual {
@@ -76,11 +84,4 @@ export class TempoService {
     return kelvin - 272.15
   }
 }
-
-class StorageKeys {
-  static readonly CIDADE = 'cidade';
-  static readonly PAIS = 'pais';
-  static readonly TEMPO_ATUAL = 'tempoAtual';
-}
-
 

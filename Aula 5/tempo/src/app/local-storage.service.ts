@@ -29,3 +29,9 @@ export class LocalStorageService {
   }
 
 }
+
+export class StorageKeys {
+  static readonly CIDADE = 'cidade';
+  static readonly PAIS = 'pais';
+  static readonly TEMPO_ATUAL = 'tempoAtual';
+}
