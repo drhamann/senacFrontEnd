@@ -11,13 +11,15 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BuscaCidadeComponent } from './busca-cidade/busca-cidade.component'
 import { TempoService } from './tempo/tempo.service';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     TempoAtualComponent,
-    BuscaCidadeComponent
+    BuscaCidadeComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
