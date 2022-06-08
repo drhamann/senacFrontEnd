@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ITempoAtual } from '../interfaces';
 import { TempoService } from '../tempo/tempo.service';
 
@@ -12,5 +12,4 @@ export class TempoAtualComponent implements OnInit {
   ngOnInit(): void { this.tempoService.tempoAtual.subscribe(data => (this.tempo = data)) }
 
   tempo!: ITempoAtual
-  // @Input()
 }

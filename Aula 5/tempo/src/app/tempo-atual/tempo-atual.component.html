@@ -1,19 +1,34 @@
-<div *ngIf="tempo">
-  <div fxLayout="row">
-    <div fxFlex="66%" class="mat-title no-margin">{{tempo.cidade}}, {{tempo.pais}}</div>
-    <div fxFlex class="right mat-subheading-2 no-margin">{{tempo.date | date:'dd/MM/yyyy' }}</div>
-  </div>
-  <div fxLayout="row" fxLayoutAlign="center center">
-    <div fxFlex="55%">
-      <img style="zoom: 175%" alt="72" height="72" [src]="tempo.image">
-    </div>
-    <div fxFlex class="right no-margin">
-      <p class="mat-display-3">{{tempo.temperatura | number:'1.0-0'}}℃
-        <span class="mat-display-1 unit">℉</span>
-      </p>
-    </div>
-  </div>
-  <div fxLayoutAlign="center" class="mat-caption">
-    {{tempo.descricao}}
-  </div>
+<app-busca-cidade></app-busca-cidade>
+
+<div fxLayout="row">
+  <div fxFlex></div>
+  <mat-card fxFlex="300px">
+    <mat-card-header>
+      <mat-card-title>
+        <div class="mat-headline">Tempo agora</div>
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div *ngIf="tempo">
+        <div fxLayout="row">
+          <div fxFlex="66%" class="mat-title no-margin">{{tempo.cidade}}, {{tempo.pais}}</div>
+          <div fxFlex class="right mat-subheading-2 no-margin">{{tempo.date | date:'dd/MM/yyyy' }}</div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="center center">
+          <div fxFlex="55%">
+            <img style="zoom: 175%" alt="72" height="72" [src]="tempo.image">
+          </div>
+          <div fxFlex class="right no-margin">
+            <p class="mat-display-3">{{tempo.temperatura | number:'1.0-0'}}℃
+              <span class="mat-display-1 unit">℉</span>
+            </p>
+          </div>
+        </div>
+        <div fxLayoutAlign="center" class="mat-caption">
+          {{tempo.descricao}}
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  <div fxFlex></div>
 </div>

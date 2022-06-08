@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ITempoAtual } from './interfaces';
-import { TempoService } from './tempo/tempo.service';
 import { catchError, Observable, retry, tap, throwError } from 'rxjs';
+import { TempoService } from './tempo/tempo.service';
 
 @Component({
   selector: 'app-root',
