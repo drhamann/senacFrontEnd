@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
@@ -11,6 +11,12 @@ import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { AuthGuardService } from './auth-guard.service';
 import { LoginComponent } from './login/login.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -20,6 +26,7 @@ import { LoginComponent } from './login/login.component';
     CounterComponent,
     FetchDataComponent,
     LoginComponent
+
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -31,7 +38,14 @@ import { LoginComponent } from './login/login.component';
       { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthGuardService], data: { expectedRole: 'admin' } },
       { path: 'login', component: LoginComponent },
       { path: 'login/:redirectUrl', component: LoginComponent }
-    ])
+    ]),
+    BrowserAnimationsModule,
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatIconModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]

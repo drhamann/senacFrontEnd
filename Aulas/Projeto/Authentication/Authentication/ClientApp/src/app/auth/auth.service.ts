@@ -28,7 +28,7 @@ export class AuthService {
       return throwError('Failed to login! Email needs to end with @test.com.')
     }
     const authStatus: IAuthStatus = { isAuthenticated: true, userId: '123', role: 'admin' }
-    if (email === 'simples') {
+    if (email === 'simples@test.com') {
       authStatus.role = 'simples'
     }
     const authResponse = {
