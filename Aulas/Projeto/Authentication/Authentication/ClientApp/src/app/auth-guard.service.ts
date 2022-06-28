@@ -13,7 +13,7 @@ export class AuthGuardService implements CanActivate, CanActivateChild, CanLoad 
     protected authService: AuthService,
     protected router: Router
   ) {
-
+    this.currentAuthStatus = this.authService.getUser()
     this.authService.authStatus.subscribe(
       authStatus => (this.currentAuthStatus = authStatus)
     )

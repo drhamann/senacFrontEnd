@@ -1,5 +1,4 @@
 import { HttpClient } from '@angular/common/http';
-import { ThisReceiver } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -56,6 +55,7 @@ export class TempoService {
     const uriParams = `lat=${coords.latitude}&lon=${coords.longitude}`
     return this.getCurrentWeatherHelper(uriParams)
   }
+
   private getCurrentWeatherHelper(uriParams: string): Observable<ITempoAtual> {
     return this.httpClient.get<ICurrentWeatherData>(
       `${environment.baseUrl}api.openweathermap.org/data/2.5/weather?${uriParams}&appid=${environment.appId}`)

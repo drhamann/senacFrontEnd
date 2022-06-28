@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { take } from 'rxjs/operators';
 import { AuthService } from '../auth/auth.service';
 
 @Component({
@@ -24,10 +25,19 @@ export class LoginComponent {
     })
   }
   async login(submittedForm: FormGroup) {
-    this.authService.login(submittedForm.value.email, submittedForm.value.password).subscribe(authStatus => {
-      if (authStatus.isAuthenticated) {
-        this.router.navigate([this.redirectUrl || '/counter'])
-      }
-    }, error => (this.loginError = error))
+    this.authService.login(submittedForm.value.email, submittedForm.value.password).pipe(take(1))
+      .subscribe({
+        next: this.onSuccessCallback.bind(this),
+        error: this.onErrorCallback.bind(this),
+      });
+  }
+
+  private onSuccessCallback(): void {
+    this.router.navigate([this.redirectUrl || '/counter'])
+  }
+
+  private onErrorCallback(): void {
+    this.loginForm.setErrors({ incorrectData: true });
+    this.loginError = 'Incorrect data'
   }
 }

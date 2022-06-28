@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
@@ -17,6 +17,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { AuthHttpInterceptor } from './auth/auth-http-interceptor';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,6 @@ import { MatInputModule } from '@angular/material/input';
     CounterComponent,
     FetchDataComponent,
     LoginComponent
-
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -35,7 +35,7 @@ import { MatInputModule } from '@angular/material/input';
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full', canLoad: [AuthGuardService] },
       { path: 'counter', component: CounterComponent, canActivate: [AuthGuardService] },
-      { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthGuardService], data: { expectedRole: 'admin' } },
+      { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthGuardService], data: { expectedRole: 'manager' } },
       { path: 'login', component: LoginComponent },
       { path: 'login/:redirectUrl', component: LoginComponent }
     ]),
@@ -47,7 +47,13 @@ import { MatInputModule } from '@angular/material/input';
     MatFormFieldModule,
     MatInputModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthHttpInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
