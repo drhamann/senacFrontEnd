@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
 import { map } from 'rxjs/operators'
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { sign } from 'fake-jwt-sign';
 import jwtDecode from 'jwt-decode';
 
@@ -10,17 +10,33 @@ import jwtDecode from 'jwt-decode';
 })
 export class AuthService {
 
-  private readonly authProvider: (email: string, password: string) => Observable<IServerAuthResponse>
+  private readonly authProvider: (email: string, password: string) => Observable<void>
   authStatus = new BehaviorSubject<IAuthStatus>({ isAuthenticated: false, userId: '', role: '' })
   private baseUrl: string
   constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-    this.authProvider = this.fakeAuthProvider
-    //this.authProvider = this.exemploDeProvedorReal
+    //this.authProvider = this.fakeAuthProvider
+    this.authProvider = this.exemploDeProvedorReal
     this.baseUrl = baseUrl
+    this.getUser()
   }
 
-  private exemploDeProvedorReal(email: string, senha: string): Observable<IServerAuthResponse> {
-    return this.http.post<IServerAuthResponse>(this.baseUrl + 'authentication/login', { email: email, senha: senha })
+  httpOptions: Record<string, unknown> = {
+    headers: new HttpHeaders({
+      'Allow-Control-Allow-Origin': '*',
+      'Content-Type': 'application/json',
+    }),
+    responseType: 'text',
+  }
+
+  private exemploDeProvedorReal(email: string, senha: string): Observable<void> {
+
+    return this.http.post<string>('https://localhost:7131/api/autenticador/login', { Email: email, Password: senha }, this.httpOptions).pipe(
+      map(value => {
+        localStorage.setItem('token', value)
+        const authStatus = jwtDecode(value as string) as IAuthStatus
+        localStorage.setItem('user', JSON.stringify(authStatus))
+      }
+      ))
   }
 
   private fakeAuthProvider(email: string, password: string): Observable<IServerAuthResponse> {
@@ -41,17 +57,24 @@ export class AuthService {
     return of(authResponse)
   }
 
+  getToken(): string {
+    return localStorage.getItem('token') as string
+  }
 
-  login(email: string, senha: string): Observable<IAuthStatus> {
+  getUser(): IAuthStatus {
+    const authUser = JSON.parse(localStorage.getItem('user') as string) as IAuthStatus
+    this.authStatus.next(authUser)
+    return authUser
+  }
+
+  login(email: string, senha: string): Observable<void> {
     this.logout()
-    const loginResponse = this.authProvider(email, senha).pipe(
-      map(value => {
-        return jwtDecode(value.accessToken) as IAuthStatus
-      }))
+    const loginResponse = this.authProvider(email, senha).pipe()
 
     loginResponse.subscribe(
       res => {
-        this.authStatus.next(res)
+
+        this.authStatus.next(this.getUser())
       },
       err => {
         this.logout()
@@ -74,4 +97,3 @@ export interface IAuthStatus {
   userId: string
   role: string
 }
-
