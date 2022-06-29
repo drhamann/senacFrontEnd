@@ -9,7 +9,7 @@ import { User } from '../../users-entities';
 export class UsersService {
 
   deleteUser(id: string): Boolean {
-    this._http.delete(this.usersUrl + 'user/' + id,).subscribe(
+    this._http.delete(this.usersUrl + '/' + id,).subscribe(
       result => {
         return true;
       },
@@ -24,11 +24,11 @@ export class UsersService {
   private users: User[] = [];
   private usersUrl = '';
   constructor(private _http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-    this.usersUrl = baseUrl + 'user';
+    this.usersUrl = baseUrl + 'api/Users';
   }
 
   async getUsers(): Promise<User[]> {
-    this._http.get<User[]>(this.usersUrl + 'user').subscribe(
+    this._http.get<User[]>(this.usersUrl).subscribe(
       result => {
         this.users = result;
       },

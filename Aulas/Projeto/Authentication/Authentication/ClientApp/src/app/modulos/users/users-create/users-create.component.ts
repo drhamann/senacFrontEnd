@@ -2,11 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-users-create',
-  template: `
-    <p>
-      users-create works!
-    </p>
-  `,
+  templateUrl: './users-create.component.html',
   styleUrls: ['./users-create.component.css']
 })
 export class UsersCreateComponent implements OnInit {
