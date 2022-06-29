@@ -1,7 +1,4 @@
 import { AfterViewInit, Component, Inject, ViewChild, OnInit } from '@angular/core';
-import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { User } from '../../users-entities';
@@ -13,7 +10,7 @@ import { UsersCreateComponent } from '../users-create/users-create.component';
   styleUrls: ['./users-home.component.css']
 })
 export class UsersHomeComponent implements AfterViewInit {
-  displayedColumns: string[] = ['code', 'name', 'validity', 'status', 'updatedAt', 'copyIcon', 'planogramImage', 'deleteIcon', 'editIcon'];
+  displayedColumns: string[] = ['id', 'username', 'role', 'email', 'deleteIcon', 'editIcon'];
   users: User[] = [];
   dataSource: MatTableDataSource<User>;
   // @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -24,7 +21,6 @@ export class UsersHomeComponent implements AfterViewInit {
   filterPlanograms: string[] = [];
 
   constructor(
-    public dialog: MatDialog,
     private router: Router,
     public usersService: UsersService
   ) {
@@ -48,7 +44,7 @@ export class UsersHomeComponent implements AfterViewInit {
   }
 
   addNewUser() {
-    const dialogRef = this.dialog.open(UsersCreateComponent, {
+    /*const dialogRef = this.dialog.open(UsersCreateComponent, {
       panelClass: 'no-padding-dialog-container',
       width: '80vw',
       data: { users: this.users }
@@ -56,7 +52,7 @@ export class UsersHomeComponent implements AfterViewInit {
 
     dialogRef.afterClosed().subscribe(async _ => {
       this.getUsers(0, 25);
-    })
+    })*/
   }
 
   deteleUser(userId: string) {

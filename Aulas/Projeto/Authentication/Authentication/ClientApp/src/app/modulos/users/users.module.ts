@@ -1,6 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-
 import { UsersRoutingModule } from './users-routing.module';
 import { UsersHomeComponent } from './users-home/users-home.component';
 import { UsersEditComponent } from './users-edit/users-edit.component';
@@ -32,8 +30,6 @@ import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -49,14 +45,11 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatCheckboxModule,
   ],
   imports: [
-    CommonModule,
     UsersRoutingModule,
     MatChipsModule,
     MatProgressBarModule,
     HttpClientModule,
-    BrowserModule,
     MatSidenavModule,
-    BrowserAnimationsModule,
     MatButtonModule,
     MatIconModule,
     MatToolbarModule,

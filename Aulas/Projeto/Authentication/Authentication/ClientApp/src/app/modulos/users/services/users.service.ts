@@ -24,7 +24,7 @@ export class UsersService {
   private users: User[] = [];
   private usersUrl = '';
   constructor(private _http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-    this.usersUrl = baseUrl + 'api/Users';
+    this.usersUrl = 'http://localhost:7131/' + 'api/Users';
   }
 
   async getUsers(): Promise<User[]> {
