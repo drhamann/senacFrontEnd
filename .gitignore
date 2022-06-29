@@ -352,3 +352,5 @@ MigrationBackup/
 Aulas/Projeto/Authentication/Authentication/ClientApp/.angular/cache/babel-webpack/
 
 *.pack
+
+*.old
