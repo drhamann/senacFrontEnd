@@ -1,0 +1,56 @@
+.users-table-main {
+  min-height: 100vh;
+  display: flex;
+  padding: 24px 2.5rem 2rem;
+  background-color: #e8e8e8;
+}
+.users-table-content-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.pre-table-header-btn-container:last-child {
+  margin-left: 16px;
+}
+
+.users-table-header {
+	display: flex;
+	margin-bottom: 20px;
+	align-items: flex-end;
+	justify-content: space-between;
+}
+.users-table-title-container {
+	display: flex;
+	flex-direction: column;
+  justify-content: space-between;
+}
+.users-table-title {
+  color: #4a6572;
+	font-size: 24px;
+  margin-bottom: 20px;
+}
+
+td,th{
+  width: 15%;
+}
+
+td.mat-cell {
+  padding: 8px;
+  vertical-align: bottom;
+}
+
+
+td.mat-cell.product-image-container {
+  padding: 12px;
+  vertical-align: middle;
+}
+td.mat-cell .product-image {
+  height: 52px;
+  max-width: 80px;
+	background-size: contain;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+
