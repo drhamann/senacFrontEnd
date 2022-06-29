@@ -16,12 +16,12 @@ namespace Authentication.Controllers
         }
 
         [HttpGet]
-        public Task<IEnumerable<User>> Get()
+        public async Task<IActionResult> Get()
         {
             var users = _userRepository.GetAll();
             if(users != null)
-                return users;
-            return null;
+                return Ok(users);
+            return BadRequest();
         }
 
         [HttpPost]

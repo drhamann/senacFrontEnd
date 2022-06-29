@@ -51,7 +51,7 @@ export class UsersCreateComponent {
   }
 
   private onSuccessCallback(): void {
-    this.router.navigate([this.redirectUrl || '/counter'])
+    this.router.navigate([this.redirectUrl || '/users/home']);
   }
 
   private onErrorCallback(): void {
