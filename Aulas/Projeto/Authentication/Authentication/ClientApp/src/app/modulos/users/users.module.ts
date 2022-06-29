@@ -33,6 +33,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -41,13 +42,10 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     UsersCreateComponent
   ],
   providers: [
-    MatButtonModule,
-    MatCheckboxModule,
   ],
   imports: [
+    CommonModule,
     UsersRoutingModule,
-    MatChipsModule,
-    MatProgressBarModule,
     HttpClientModule,
     MatSidenavModule,
     MatButtonModule,
@@ -66,16 +64,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatSelectModule,
     MatSlideToggleModule,
     ReactiveFormsModule,
-    MatSnackBarModule,
-    MatProgressSpinnerModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatPaginatorModule,
-    MatSortModule,
-    MatMenuModule,
-    MatBadgeModule,
-    MatBottomSheetModule,
-    MatTooltipModule,
     FlexLayoutModule,
   ]
 })

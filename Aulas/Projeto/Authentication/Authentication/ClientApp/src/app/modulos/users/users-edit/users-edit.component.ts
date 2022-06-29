@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-users-edit',
@@ -10,8 +10,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./users-edit.component.css']
 })
 export class UsersEditComponent implements OnInit {
-
-  constructor() { }
+  @Input() id: string
+  constructor() {
+    this.id = '';
+  }
 
   ngOnInit(): void {
   }

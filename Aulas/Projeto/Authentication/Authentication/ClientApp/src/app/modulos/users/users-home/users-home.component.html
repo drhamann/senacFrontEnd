@@ -12,58 +12,27 @@
       </div>
     </div>
 
-    <div class="mat-elevation-z8">
+    <p *ngIf="!users"><em>Loading...</em></p>
 
-      <table mat-table [dataSource]="dataSource" matSort class="custom-table">
-
-        <ng-container matColumnDef="id">
-          <th mat-header-cell *matHeaderCellDef>Id</th>
-          <td mat-cell *matCellDef="let row"> {{row.id}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="username">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Nome de usuario </th>
-          <td mat-cell *matCellDef="let row">
-            {{row.userName}}
-          </td>
-        </ng-container>
-
-        <ng-container matColumnDef="role">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Role</th>
-          <td mat-cell *matCellDef="let row">
-            {{row.role}}
-          </td>
-        </ng-container>
-
-        <ng-container matColumnDef="email">
-          <th mat-header-cell *matHeaderCellDef>Email</th>
-          <td mat-cell *matCellDef="let row"> {{row.email}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="deleteIcon">
-          <th mat-header-cell *matHeaderCellDef> </th>
-          <td mat-cell *matCellDef="let row">
-            <button matTooltip="Remover" mat-button style="min-width: 1%" (click)="deteleUser(row.id)">
-              <mat-icon fontSet="fa" fontIcon="fa-trash" style="color:#919191"></mat-icon>
-            </button>
-          </td>
-        </ng-container>
-
-        <ng-container matColumnDef="editIcon">
-          <th mat-header-cell *matHeaderCellDef> </th>
-          <td mat-cell *matCellDef="let row">
-            <button mat-button matTooltip="Edit" routerLink="/users-edit" [queryParams]="{ id : row.id }"
-              style="min-width: 1%">
-              <mat-icon fontSet="fa" fontIcon="fa-edit" style="color:#919191"></mat-icon>
-            </button>
-          </td>
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+    <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="users">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Nome de usuario </th>
+          <th>Role</th>
+          <th>Email</th>
+          <th>Delete</th>
+          <th>Edit</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td> {{user.id}} </td>
+          <td>{{user.userName}}</td>
+          <td>{{user.role}}</td>
+          <td> {{user.email}} </td>
+          <td><button (click)="deteleUser(user.id)">Delete</button></td>
+          <td><button (click)="editUser(user.id)" style="min-width: 1%">Edit </button></td>
         </tr>
-      </table>
-    </div>
-
+      </tbody>
+    </table>
   </div>
-</div>

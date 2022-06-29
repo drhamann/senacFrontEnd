@@ -5,6 +5,7 @@ import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
 
 export function getBaseUrl() {
+  return 'https://localhost:7131/';
   return document.getElementsByTagName('base')[0].href;
 }
 

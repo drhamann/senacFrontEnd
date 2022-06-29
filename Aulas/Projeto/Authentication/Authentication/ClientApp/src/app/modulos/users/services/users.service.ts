@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { throwError as observableThrowError, Observable, of } from 'rxjs';
 import { User } from '../../users-entities';
 
@@ -21,23 +21,22 @@ export class UsersService {
     return false;
   }
 
-  private users: User[] = [];
   private usersUrl = '';
   constructor(private _http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-    this.usersUrl = 'http://localhost:7131/' + 'api/Users';
+    this.usersUrl = baseUrl + 'api/Users';
   }
 
-  async getUsers(): Promise<User[]> {
-    this._http.get<User[]>(this.usersUrl).subscribe(
-      result => {
-        this.users = result;
-      },
-      error => {
-        console.error(error)
-        throw observableThrowError(error);
-      });
 
-    return this.users;
+  httpOptions: Record<string, unknown> = {
+    headers: new HttpHeaders({
+      'Allow-Control-Allow-Origin': '*',
+      'Content-Type': 'application/json',
+    }),
+    responseType: 'text',
+  }
+
+  getUsers(): Observable<User[]> {
+    return this._http.get<User[]>(this.usersUrl, this.httpOptions);
   }
 
 }
