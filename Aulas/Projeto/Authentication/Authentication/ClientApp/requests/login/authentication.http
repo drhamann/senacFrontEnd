@@ -1,0 +1,12 @@
+###
+POST https://localhost:7131/api/autenticador/login
+Content-Type: application/json
+
+{
+  "Email": "batman@test.com",
+  "Password": "batman"
+}
+
+###
+GET https://localhost:44443/weatherforecast
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImJhdG1hbiIsInJvbGUiOiJtYW5hZ2VyIiwibmJmIjoxNjU2Mzc3ODUzLCJleHAiOjE2NTYzODUwNTMsImlhdCI6MTY1NjM3Nzg1M30.vTLh9iM0gzAb3YONz1rt8FtOsOsB4JL30VOuA09RxxA
