@@ -18,6 +18,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { AuthHttpInterceptor } from './auth/auth-http-interceptor';
+import { NotfoundComponent } from './notfound/notfound.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { AuthHttpInterceptor } from './auth/auth-http-interceptor';
     HomeComponent,
     CounterComponent,
     FetchDataComponent,
-    LoginComponent
+    LoginComponent,
+    NotfoundComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -37,7 +39,8 @@ import { AuthHttpInterceptor } from './auth/auth-http-interceptor';
       { path: 'counter', component: CounterComponent, canActivate: [AuthGuardService] },
       { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthGuardService], data: { expectedRole: 'manager' } },
       { path: 'login', component: LoginComponent },
-      { path: 'login/:redirectUrl', component: LoginComponent }
+      { path: 'login/:redirectUrl', component: LoginComponent },
+      { path: 'users', loadChildren: () => import('./modulos/users/users.module').then(m => m.UsersModule) },
     ]),
     BrowserAnimationsModule,
     ReactiveFormsModule,
