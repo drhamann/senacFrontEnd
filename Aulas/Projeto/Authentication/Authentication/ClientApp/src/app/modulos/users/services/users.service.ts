@@ -8,6 +8,26 @@ import { User } from '../../users-entities';
 })
 export class UsersService {
 
+  private usersUrl = '';
+  constructor(private _http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
+    this.usersUrl = baseUrl + 'api/Users';
+  }
+  httpOptions: Record<string, unknown> = {
+    headers: new HttpHeaders({
+      'Allow-Control-Allow-Origin': '*',
+      'Content-Type': 'application/json',
+    }),
+    responseType: 'text',
+  }
+
+  getUsers(): Observable<User[]> {
+    return this._http.get<User[]>(this.usersUrl, this.httpOptions);
+  }
+
+  createUser(email: string, senha: string, name: String, role: String, confirmPassword: String): Observable<void> {
+    return this._http.post<void>(this.usersUrl, { email: email, password: senha, userName: name, role: role, confirmPassword: confirmPassword }, this.httpOptions);
+  }
+
   deleteUser(id: string): Boolean {
     this._http.delete(this.usersUrl + '/' + id,).subscribe(
       result => {
@@ -19,24 +39,6 @@ export class UsersService {
       });
 
     return false;
-  }
-
-  private usersUrl = '';
-  constructor(private _http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-    this.usersUrl = baseUrl + 'api/Users';
-  }
-
-
-  httpOptions: Record<string, unknown> = {
-    headers: new HttpHeaders({
-      'Allow-Control-Allow-Origin': '*',
-      'Content-Type': 'application/json',
-    }),
-    responseType: 'text',
-  }
-
-  getUsers(): Observable<User[]> {
-    return this._http.get<User[]>(this.usersUrl, this.httpOptions);
   }
 
 }
