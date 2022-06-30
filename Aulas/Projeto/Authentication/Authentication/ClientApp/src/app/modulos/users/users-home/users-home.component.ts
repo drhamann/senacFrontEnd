@@ -11,9 +11,8 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class UsersHomeComponent implements OnInit {
   public users!: User[];
-  total: number = 25;
   filterPlanograms: string[] = [];
-
+  add = false;
   constructor(private router: Router, public usersService: UsersService) { }
   ngOnInit(): void {
     this.usersService.usersData.subscribe(users => { this.users = users; });

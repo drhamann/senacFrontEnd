@@ -1,11 +1,13 @@
 ﻿using Authentication.Domain.Entities;
 using Authentication.Infra;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Authentication.Controllers
 {
     [Route("api/Users")]
     [ApiController]
+    [Authorize]
     public class UsersController : ControllerBase
     {
         public IUserRepository _userRepository { get; }

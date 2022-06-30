@@ -26,7 +26,7 @@ namespace Authentication.Infra
         }
         public async Task<User> Get(string email, string password)
         {
-            return Users.FirstOrDefault(x => x.Email.ToLower() == email.ToLower() && x.Password == x.Password);
+            return Users.FirstOrDefault(x => x.Email.ToLower().Equals(email.ToLower(), StringComparison.Ordinal) && x.Password.Equals(password));
         }
 
         public async Task<IEnumerable<User>> GetAll()
@@ -77,6 +77,7 @@ namespace Authentication.Infra
             {
                 return "Usuario não encontrado";
             }
+            Users.RemoveAt(indexToUpdate);
             return string.Empty;
         }
 

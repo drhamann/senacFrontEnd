@@ -19,3 +19,4 @@ Aulas do curso jovem programador senac
 	Api simple em .net 6 com swagger, sem banco e somente uma iteração simples guardando em lista
 
 -
+## Melhorar explicação sobre Typescript

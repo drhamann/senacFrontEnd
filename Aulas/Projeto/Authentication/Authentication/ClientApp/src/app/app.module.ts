@@ -41,6 +41,7 @@ import { NotfoundComponent } from './notfound/notfound.component';
       { path: 'login', component: LoginComponent },
       { path: 'login/:redirectUrl', component: LoginComponent },
       { path: 'users', loadChildren: () => import('./modulos/users/users.module').then(m => m.UsersModule) },
+      { path: 'tempo', loadChildren: () => import('./modulos/tempo/tempo.module').then(m => m.TempoModule) },
     ]),
     BrowserAnimationsModule,
     ReactiveFormsModule,

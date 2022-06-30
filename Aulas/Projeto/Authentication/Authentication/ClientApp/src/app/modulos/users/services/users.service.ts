@@ -37,7 +37,11 @@ export class UsersService {
   }
 
   deleteUser(id: string): Observable<void> {
-    return this._http.delete<void>(this.usersUrl + '/' + id, this.httpOptions);
+    return this._http.delete<void>(this.usersUrl + '?id=' + id, this.httpOptions);
+  }
+
+  updateUser(id: string, email: string, senha: string, name: String, role: String, confirmPassword: String): Observable<void> {
+    return this._http.put<void>(this.usersUrl, { id: id, email: email, password: senha, userName: name, role: role, confirmPassword: confirmPassword }, this.httpOptions);
   }
 
 }
