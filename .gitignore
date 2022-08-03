@@ -348,3 +348,13 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+
+*.pack
+
+Aulas/Projeto/Authentication/Authentication/ClientApp/.angular/cache/babel-webpack/
+
+Aulas/Projeto/tempo/.angular/cache/13.3.5/babel-webpack/
+
+*.old
+
+*.pack_
