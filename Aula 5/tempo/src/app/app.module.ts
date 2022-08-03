@@ -11,13 +11,15 @@ import { MaterialModule } from './material.module'
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BuscaCidadeComponent } from './busca-cidade/busca-cidade.component'
+import { PoluicaoComponent } from './poluicao/poluicao.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     TempoAtualComponent,
-    BuscaCidadeComponent
+    BuscaCidadeComponent,
+    PoluicaoComponent,
   ],
   imports: [
     BrowserModule,

@@ -7,6 +7,18 @@ export interface ITempoAtual {
   descricao: string
 }
 
+export interface IPoluicao {
+  qualidadeDoAr: string
+  co: string
+  no: number
+  no2: number
+  o3: number
+  so2: number
+  pm25: number
+  pm10: number
+  nh3: number
+}
+
 export interface Coordenadas {
   latitude: number
   longitude: number
