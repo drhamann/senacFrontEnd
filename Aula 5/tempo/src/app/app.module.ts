@@ -12,6 +12,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BuscaCidadeComponent } from './busca-cidade/busca-cidade.component'
 import { PoluicaoComponent } from './poluicao/poluicao.component';
+import { PoluicaoService } from './poluicao/shared/poluicao.service';
 
 
 @NgModule({
@@ -31,7 +32,7 @@ import { PoluicaoComponent } from './poluicao/poluicao.component';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [TempoService],
+  providers: [TempoService, PoluicaoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
