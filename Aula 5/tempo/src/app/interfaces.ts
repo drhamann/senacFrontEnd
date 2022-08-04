@@ -8,7 +8,7 @@ export interface ITempoAtual {
 }
 
 export interface IPoluicao {
-  qualidadeDoAr: string
+  qualidadeDoAr: AirQuality
   co: number
   no: number
   no2: number
@@ -72,4 +72,11 @@ export interface RootObject {
 export interface IPoluitionData {
   coord: Coord;
   list: List[];
+}
+export enum AirQuality {
+  Good = 1,
+  Fair = 2,
+  Moderate = 3,
+  Poor = 4,
+  Very_Poor = 5
 }

@@ -1,25 +1,25 @@
-<!--<div *ngIf="tempo"> -->
+<div *ngIf="poluicao"> 
 <div fxLayout="row">
   <div fxFlex class="right mat-subheading-2 no-margin">{{'03/08/2022' | date:'dd/MM/yyyy' }}</div>
 </div>
 <div fxLayout="row" fxLayoutAlign="center center">
   <div fxFlex="66%" fxLayoutAlign="center center">
     <p>
-      <span class="mat-headline">Qualidade do ar: Bom</span>
+      <span class="mat-headline">Qualidade do ar: {{poluicao.qualidadeDoAr}}</span>
     </p>
   </div>
 </div>
 <div fxLayout="row" fxLayoutAlign="center center">
   <div fxFlex class="right no-margin">
     <p class="mat-display-4">
-      <span class="mat-display-1 unit">℉ : </span>
-      <span class="mat-display-1 unit">℉</span>
-      <span class="mat-display-1 unit">℉</span>
-      <span class="mat-display-1 unit">℉</span>
-      <span class="mat-display-1 unit">℉</span>
-      <span class="mat-display-1 unit">℉</span>
-      <span class="mat-display-1 unit">℉</span>
-      <span class="mat-display-1 unit">℉</span>
+      <span class="mat-display-1 unit">co : {{poluicao.co}}</span>
+      <span class="mat-display-1 unit">no : {{poluicao.no}}</span>
+      <span class="mat-display-1 unit">no2 : {{poluicao.no2}}</span>
+      <span class="mat-display-1 unit">o3 : {{poluicao.o3}}</span>
+      <span class="mat-display-1 unit">so2 : {{poluicao.so2}}</span>
+      <span class="mat-display-1 unit">pm25 : {{poluicao.pm25}}</span>
+      <span class="mat-display-1 unit">pm10 : {{poluicao.pm10}}</span>
+      <span class="mat-display-1 unit">nh3 : {{poluicao.nh3}}</span>
     </p>
   </div>
 </div>

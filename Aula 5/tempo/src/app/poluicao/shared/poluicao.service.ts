@@ -1,60 +1,31 @@
 import { HttpClient } from '@angular/common/http';
-import { ThisReceiver } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable } from 'rxjs';
-import { IPoluitionData } from 'src/app/interfaces';
+import { AirQuality, IPoluitionData } from 'src/app/interfaces';
 import { environment } from 'src/environments/environment';
-import { Coordenadas, ICurrentWeatherData, ITempoAtual } from '../interfaces';
-import { LocalStorageService, StorageKeys } from '../local-storage.service';
-import { IPoluicao, List } from '../../interfaces';
+import { IPoluicao, List, Coordenadas } from '../../interfaces';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class TempoService {
+export class PoluicaoService {
 
-  tempoAtual: BehaviorSubject<ITempoAtual> = new BehaviorSubject<ITempoAtual>({
-    cidade: '',
-    pais: '',
-    date: Date.now().toLocaleString(),
-    descricao: '',
-    temperatura: 0,
-    image: ''
+  poluicao: BehaviorSubject<IPoluicao> = new BehaviorSubject<IPoluicao>({
+    qualidadeDoAr: AirQuality.Good,
+    co: 0,
+    no2: 0,
+    o3: 0,
+    so2: 0,
+    pm25: 0,
+    pm10: 0,
+    nh3: 0,
+    no: 0
   })
 
-  constructor(private httpClient: HttpClient, private localStorageService: LocalStorageService) {
-    let { cidade, pais } = this.retorneUltimaBusca();
-    this.getCurrentWeather(cidade, pais).subscribe(data => this.tempoAtual.next(data))
+  constructor(private httpClient: HttpClient) {
   }
 
-  private retorneUltimaBusca() {
-    let cidade = this.localStorageService.get(StorageKeys.CIDADE);
-    cidade = cidade ? cidade : 'Lages';
-    let pais = this.localStorageService.get(StorageKeys.PAIS);
-    pais = pais ? pais : 'Brasil';
-    this.tempoAtual.value.cidade = cidade;
-    this.tempoAtual.value.pais = pais;
-    return { cidade, pais };
-  }
-
-  getDefaulttWeather(): Observable<ITempoAtual> {
-    return this.getCurrentWeather(this.tempoAtual.value.cidade, this.tempoAtual.value.pais)
-  }
-
-  getCurrentWeather(busca: string | number, pais?: string): Observable<ITempoAtual> {
-    let uriParams = ''
-    if (typeof busca === 'string') {
-      uriParams = `q=${busca}`
-    } else {
-      uriParams = `zip=${busca}`
-    }
-    if (pais) {
-      uriParams = `${uriParams},${pais}`
-    }
-    return this.getCurrentWeatherHelper(uriParams)
-  }
-
-  getCurrentWeatherByCoords(coords: Coordenadas): Observable<ITempoAtual> {
+  getPolutionByCoords(coords: Coordenadas): Observable<IPoluicao> {
     const uriParams = `lat=${coords.latitude}&lon=${coords.longitude}`
     return this.getCurrentWeatherHelper(uriParams)
   }
@@ -63,10 +34,26 @@ export class TempoService {
   private transformToITempoAtual(data: IPoluitionData): IPoluicao {
     console.log(data)
     return {
-      qualidadeDoAr: data.list[0].main.aqi.toString(),
+      qualidadeDoAr: data.list[0].main.aqi,
       co: data.list[0].components.co,
-
+      no: data.list[0].components.no,
+      no2: data.list[0].components.no2,
+      o3: data.list[0].components.o3,
+      so2: data.list[0].components.so2,
+      pm25: data.list[0].components.pm2_5,
+      pm10: data.list[0].components.pm10,
+      nh3: data.list[0].components.pm10,
     }
+  }
+
+  private getCurrentWeatherHelper(uriParams: string): Observable<IPoluicao> {
+    return this.httpClient.get<IPoluitionData>(
+      `${environment.baseUrl}api.openweathermap.org/data/2.5/air_pollution?${uriParams}&appid=${environment.appId}`)
+      .pipe(map(data => {
+        const poluicao = this.transformToITempoAtual(data)
+        console.log(poluicao)
+        return poluicao
+      }))
   }
 }
 
