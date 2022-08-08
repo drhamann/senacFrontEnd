@@ -2,46 +2,21 @@
 
 Aulas do curso jovem programador senac
 
-## Aula_dia_25_04
+## Aula_dia_Authentication_CRUD
 
-  Conhecer os integrantes da vida noturna da programação
+	Aula para ver integração entre back end e fron ent com uso de autenticação nas duas parter
+	
+## CRUD
+	
+	Ver como funciona o crud usando formularios no angular mandando dados para o back end
+	
+## ANGULAR
 
-### Apresentar conceitos de desenvolvimento WEB
-
-- Arquitetura cliente servidor
-- Arquitetura serverless
-- Front vs back
-
-### Conceitos GIT
-
-- <https://blog.testproject.io/2021/03/22/git-commands-every-sdet-should-know/>
-
-### Comandos
-
-- git clone
-- git fetch
-  
-### HTML
-
-- Apresentado o básico
-- Feito exercicio
-- Ficou de pendencia o todo list e o exemplo com componentes
-
-## AULA2 26/04
-
-- Continuar exericio HTML 03 e 04
-- Criar uma página de exemplo sem css
-
-### CSS
-
-### JS
-
-- ng new JavaScriptPrimer --routing false --style css --skip-git --skip-tests
-
-### API
-
-- <https://openweathermap.org/current>
-
-### Angular
+	Apresentação, modulos, rotas e guard
+	
+## .net 6
+	
+	Api simple em .net 6 com swagger, sem banco e somente uma iteração simples guardando em lista
 
 -
+## Melhorar explicação sobre Typescript

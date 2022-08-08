@@ -1,0 +1,15 @@
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImJhdG1hbiIsInJvbGUiOiJzaW1wbGVzIiwiZW1haWwiOiJiYXRtYW5AdGVzdC5jb20iLCJpc0F1dGhlbnRpY2F0ZWQiOiJ0cnVlIiwidXNlcklkIjoiYmIyMDllYTMtZTJiMi00MTE4LWE0NTItODQ5OGE2MTVmNzhhIiwibmJmIjoxNjU2NTQxMjQxLCJleHAiOjE2NTY1NDg0NDEsImlhdCI6MTY1NjU0MTI0MX0.lqh4iud4LITiXEAWBW0GdoQ1q5_uybL5PsrU0ShsGv4
+
+###
+## Teste login
+POST https://localhost:7131/api/autenticador/login
+Content-Type: application/json
+
+{
+  "Email": "batman@test.com",
+  "Password": "batman123456"
+}
+
+###
+GET https://localhost:7131/weatherforecast
+Authorization: Bearer {{token}}

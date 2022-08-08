@@ -1,0 +1,87 @@
+<div fxLayout="row" fxLayoutAlign="center">
+  <mat-card fxFlex="400px">
+
+    <form [formGroup]="createForm" (ngSubmit)="createUser(createForm)" fxLayout="column">
+
+      <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+        <mat-icon matPrefix>account_box</mat-icon>
+        <mat-form-field fxFlex>
+          <input matInput placeholder="name" arial-label="name" type="text" formControlName="name">
+          <mat-hint>Minimum 8 characters</mat-hint>
+          <mat-error *ngIf="createForm.get('name')?.hasError('required')">
+            Name is required
+          </mat-error>
+          <mat-error *ngIf="createForm.get('name')?.hasError('minlength')">
+            Name is at least 8 characters long
+          </mat-error>
+          <mat-error *ngIf="createForm.get('name')?.hasError('maxlength')">
+            Name cannot be longer than 50 name
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+        <mat-icon matPrefix>assignment ind icon</mat-icon>
+        <mat-form-field fxFlex>
+          <input matInput placeholder="Role" arial-label="ROle" type="text" formControlName="role">
+          <mat-hint>Minimum 8 characters</mat-hint>
+          <mat-error *ngIf="createForm.get('role')?.hasError('required')">
+            role is required
+          </mat-error>
+          <mat-error *ngIf="createForm.get('role')?.hasError('minlength')">
+            role is at least 8 characters long
+          </mat-error>
+          <mat-error *ngIf="createForm.get('role')?.hasError('maxlength')">
+            role cannot be longer than 50 name
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+        <mat-icon>email</mat-icon>
+        <mat-form-field fxFlex>
+          <input matInput placeholder="E-mail" aria-label="E-mail" formControlName="email">
+          <mat-error *ngIf="createForm.get('email')?.hasError('email')">
+            E-mail is required
+          </mat-error>
+          <mat-error *ngIf="createForm.get('email')?.hasError('email')">
+            E-mail is not valid
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+        <mat-icon matPrefix>vpn_key</mat-icon>
+        <mat-form-field fxFlex>
+          <input matInput placeholder="Password" arial-label="Password" type="password" formControlName="password">
+          <mat-hint>Minimum 8 characters</mat-hint>
+          <mat-error *ngIf="createForm.get('password')?.hasError('required')">
+            Password is required
+          </mat-error>
+          <mat-error *ngIf="createForm.get('password')?.hasError('minlength')">
+            Password is at least 8 characters long
+          </mat-error>
+          <mat-error *ngIf="createForm.get('password')?.hasError('maxlength')">
+            Password cannot be longer than 50 characters
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+        <mat-icon matPrefix>vpn_key</mat-icon>
+        <mat-form-field fxFlex>
+          <input matInput placeholder="Confirme a senha" arial-label="Confirme a senha" type="password"
+            formControlName="confirmPassword">
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="row" class="margin-top">
+        <div *ngIf="createError" class="mat-captionerror">{{createError}}</div>
+        <div class="flex-spacer"></div>
+        <button mat-raised-button type="submit" color="primary" [disabled]="createForm.invalid">Login</button>
+      </div>
+
+    </form>
+
+  </mat-card>
+</div>

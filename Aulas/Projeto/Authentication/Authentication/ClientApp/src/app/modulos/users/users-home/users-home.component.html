@@ -1,0 +1,39 @@
+<div class="users-table-main">
+  <div class="users-table-content-container">
+
+    <div class="users-table-header">
+      <div class="users-table-title-container">
+        <div class="users-table-title">
+          Usuarios
+        </div>
+      </div>
+      <div>
+        <button mat-flat-button color="primary" (click)="addNewUser()">Novo Usuario</button>
+      </div>
+    </div>
+
+    <p *ngIf="!users"><em>Loading...</em></p>
+
+    <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="users">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Nome de usuario </th>
+          <th>Role</th>
+          <th>Email</th>
+          <th>Delete</th>
+          <th>Edit</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td> {{user.id}} </td>
+          <td>{{user.userName}}</td>
+          <td>{{user.role}}</td>
+          <td> {{user.email}} </td>
+          <td><button (click)="deteleUser(user.id)">Delete</button></td>
+          <td><button (click)="editUser(user.id)" style="min-width: 1%">Edit </button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
